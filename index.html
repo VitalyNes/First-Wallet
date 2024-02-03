@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FirstWallet</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1 class="text-primary" style="margin-left: 20px;">VIN Wallet</h1>
+    </header>
+
+    <div class="row">
+        <div class="col-md-2">
+            
+        
+            <button class="btn btn-light w-100 mb-2" onclick="selectCurrency('ETH', 'Ethereum')">
+                <img src="Images/ethereum-eth-logo.png" alt="ETH" style="height: 20px;"> Ethereum
+            </button>
+
+            <button class="btn btn-light w-100 mb-2" onclick="selectCurrency('BTC', 'Bitcoin')">
+                <img src="Images/bitcoin-btc-logo.png" alt="BTC" style="height: 20px;"> Bitcoin
+            </button>
+            
+            <button class="btn btn-light w-100 mb-2" onclick="selectCurrency('LTC', 'Litecoin')">
+                <img src="Images/litecoin-ltc-logo.png" alt="LTC" style="height: 20px;"> Litecoin
+            </button>
+
+            <button class="btn btn-light w-100 mb-2" onclick="selectCurrency('DOT', 'DOT')">
+                <img src="Images/polkadot-new-dot-logo.png" alt="DOT" style="height: 20px;"> DOT
+            </button>
+
+            <button class="btn btn-light w-100 mb-2" onclick="selectCurrency('BNB', 'BNB')">
+                <img src="Images/bnb-bnb-logo.png" alt="BNB" style="height: 20px;"> BNB
+            </button>
+
+            <button class="btn btn-light w-100 mb-2" onclick="selectCurrency('VIN', 'VIN (ERC20)')">
+                <img style="height: 20px;"> VIN(ERC20)
+            </button>
+            
+        </div>
+
+        <div class="col-md-10">
+            <div id="app" class="container">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="mb-3">Обрана криптовалюта: <span id="selectedCurrency">ETH</span></div>
+            
+                        <div class="mb-3">
+                            <label for="input-address" class="form-label">Адреса аккаунту:</label>
+                            <input type="text" id="input-address" class="form-control" disabled>
+                        </div>
+                        <div class="mb-3">Поточний баланс: <span id="accountBalance"></span> <span id="currencyLabel"></span></div>
+                        <div id="send-funds">
+                            <div class="mb-3">
+                                <label for="recipient-address" class="form-label">Receiver:</label>
+                                <input type="text" id="recipient-address" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount:</label>
+                                <input type="text" id="amount" class="form-control">
+                            </div>
+                            <button id="send-button" class="btn btn-primary">Send</button>
+                        </div>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let accountAddress = '0x7D10F5C5142412589a514F29E0dec7554824FE6E'; 
+        const accountBalance = 100; 
+
+        function setupWallet() {
+            document.getElementById('input-address').value = accountAddress;
+            document.getElementById('accountBalance').textContent = accountBalance;
+        }
+
+        function selectCurrency(currencyCode, currencyName) {
+            document.getElementById('selectedCurrency').textContent = currencyName;
+            document.getElementById('currencyLabel').textContent = currencyCode;
+        }
+
+        function sendFunds() {
+            const amount = document.getElementById('amount').value;
+            const receiver = document.getElementById('recipient-address').value;
+            const currency = document.getElementById('selectedCurrency').textContent;
+
+            alert(`Sending ${amount} ${currency} to ${receiver}`);
+        }
+
+        document.getElementById('send-button').addEventListener('click', sendFunds);
+        window.onload = setupWallet;
+    </script>
+</body>
+</html>
+
+
+
+
